@@ -109,6 +109,21 @@ func (api *API) HostsCreate(hosts Hosts) (err error) {
 	return
 }
 
+func (api *API) HostUpdate(hosts Hosts) (err error) {
+	_, err = api.CallWithError("host.update", hosts)
+	if err != nil {
+		return err
+	}
+
+	return nil
+/*	result := response.Result.(map[string]interface{})
+	hostids := result["hostids"].([]interface{})
+	for i, id := range hostids {
+		hosts[i].HostId = id.(string)
+	}*/
+	//return
+}
+
 // Wrapper for host.delete: https://www.zabbix.com/documentation/2.2/manual/appendix/api/host/delete
 // Cleans HostId in all hosts elements if call succeed.
 func (api *API) HostsDelete(hosts Hosts) (err error) {
